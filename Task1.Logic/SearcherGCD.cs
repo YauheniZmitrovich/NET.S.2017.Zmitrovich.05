@@ -8,7 +8,7 @@ using System.Diagnostics;
 namespace Task1.Logic
 {
     /// <summary>
-    /// The class helps for computing the greatest common divisor (GCD) of numbers.
+    /// The class helps to compute the greatest common divisor (GCD) of numbers.
     /// </summary>
     public static class SearcherGCD
     {
