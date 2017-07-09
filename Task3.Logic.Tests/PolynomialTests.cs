@@ -92,6 +92,31 @@ namespace Task3.Logic.Tests
 
         #endregion
 
+        #region EqualsTests
+
+        [Test]
+        [Category("Polynomial")]
+        public void EqualsObj_RefEquals_RetrunsTrue()
+        {
+            double[] arr = { 12.34, 12.1 };
+            Polynomial ob1 = new Polynomial(arr);
+            object ob2 = ob1;
+
+            Assert.True(ob1.Equals(ob2));
+        }
+
+        [Test]
+        [Category("Polynomial")]
+        public void EqualsPol_PolEquals_RetrunsTrue()
+        {
+            double[] arr = { 12.34, 12.1 };
+            Polynomial ob1 = new Polynomial(arr);
+            Polynomial ob2 = new Polynomial(arr);
+
+            Assert.True(ob1.Equals(ob2));
+        }
+
+        #endregion
 
     }
 }

@@ -45,6 +45,11 @@ namespace Task3.Logic
             }
         }
 
+        public static explicit operator double[] (Polynomial pol)
+        {
+            return pol?._coeffs;
+        }
+
 
         #region ObjectMethodsOverloading
 
@@ -53,13 +58,38 @@ namespace Task3.Logic
             return ReferenceEquals(obj, this);
         }
 
-        //public bool Equals(Polynomial pol)
-        //{
-        //    if (pol?.Length != Length)
-        //        return false;
-        //}
-        //TODO:OVERLOADING
+        public bool Equals(Polynomial pol)
+        {
+            if (pol?.Length != Length)
+                return false;
+
+            return _coeffs.SequenceEqual((double[])pol);
+        }
+
+        public override int GetHashCode()
+        {
+            return _coeffs.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            string str = "";
+
+            foreach (double c in _coeffs)
+                str += c.ToString() + " ";
+
+            return str;
+        }
+
         #endregion
+
+
+        #region OperatorsOverloading
+
+
+
+        #endregion
+
 
         #region Private
 
