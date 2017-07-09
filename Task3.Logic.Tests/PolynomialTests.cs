@@ -152,8 +152,8 @@ namespace Task3.Logic.Tests
         }
 
         [Test]
-        [Ignore("TODO")]
         [CategoryAttribute("Polynomial")]
+        [Ignore("For double don't working")]
         public void OperatorPlus_Overflow_ThrowsOverflowException()
         {
             double[] arr1 = { double.MaxValue, 13.0, 13.5 };
@@ -164,6 +164,7 @@ namespace Task3.Logic.Tests
 
             Assert.Catch<OverflowException>(() => res = pol1 + pol2);
         }
+
         #endregion
 
 

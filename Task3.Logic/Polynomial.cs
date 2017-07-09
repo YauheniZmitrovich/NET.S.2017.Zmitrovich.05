@@ -255,11 +255,9 @@ namespace Task3.Logic
             double[] resArr = new double[longest.Length];
             longest.CopyTo(resArr, 0);
 
-            checked
-            {
-                for (int i = 0; i < shortest.Length; i++)
+            //Is it any solution of overloading like unchecked for int?
+            for (int i = 0; i < shortest.Length; i++)
                     resArr[i] += shortest[i];
-            }
 
             return resArr;
         }
@@ -271,11 +269,8 @@ namespace Task3.Logic
             double[] resArr = new double[longest.Length];
             arr1.CopyTo(resArr, 0);
 
-            checked
-            {
                 for (int i = 0; i < arr2.Length; i++)
                     resArr[i] -= arr2[i];
-            }
 
             return resArr;
         }
@@ -301,6 +296,8 @@ namespace Task3.Logic
 
 
         #endregion
+
+        //TODO:overflowing and null members.
 
     }
 }
