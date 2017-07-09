@@ -130,6 +130,30 @@ namespace Task3.Logic
 
         #endregion
 
+        #region Operator-
+
+        public static Polynomial operator -(Polynomial ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Subtract(ob1, ob2));
+        }
+
+        public static Polynomial operator -(double[] ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Subtract(ob1, ob2));
+        }
+
+        public static Polynomial operator -(Polynomial ob1, double[] ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Subtract(ob1, ob2));
+        }
+
+        #endregion
 
         #endregion
 
@@ -164,8 +188,27 @@ namespace Task3.Logic
             double[] resArr = new double[longest.Length];
             longest.CopyTo(resArr, 0);
 
-            for (int i = 0; i < shortest.Length; i++)
-                resArr[i] += shortest[i];
+            checked
+            {
+                for (int i = 0; i < shortest.Length; i++)
+                    resArr[i] += shortest[i];
+            }
+
+            return resArr;
+        }
+
+        private static double[] Subtract(double[] arr1, double[] arr2)
+        {
+            double[] longest = (arr1.Length > arr2.Length) ? arr1 : arr2;
+
+            double[] resArr = new double[longest.Length];
+            arr1.CopyTo(resArr, 0);
+
+            checked
+            {
+                for (int i = 0; i < arr2.Length; i++)
+                    resArr[i] -= arr2[i];
+            }
 
             return resArr;
         }

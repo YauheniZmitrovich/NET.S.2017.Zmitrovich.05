@@ -151,7 +151,53 @@ namespace Task3.Logic.Tests
             Assert.Catch<ArgumentNullException>(() => res = pol1 + arr2);
         }
 
+        [Test]
+        [Ignore("TODO")]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorPlus_Overflow_ThrowsOverflowException()
+        {
+            double[] arr1 = { double.MaxValue, 13.0, 13.5 };
+            double[] arr2 = { 10, 13.0, 13.5 };
+            double[] res;
+            Polynomial pol1 = new Polynomial(arr1);
+            Polynomial pol2 = new Polynomial(arr2);
+
+            Assert.Catch<OverflowException>(() => res = pol1 + pol2);
+        }
         #endregion
 
+
+        #region Operator- Tests
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorMinus_TwoPolynomial_ReturnsPolynomial()
+        {
+            double[] arr1 = { 7.5, 7.0 };
+            double[] arr2 = { 12.5, 13.0, 13.5 };
+            double[] expectedArr = { -5, -6, -13.5 };
+
+            Polynomial pol1 = new Polynomial(arr1);
+            Polynomial pol2 = new Polynomial(arr2);
+            Polynomial expectedPol = new Polynomial(expectedArr);
+
+            Polynomial resPol = pol1 - pol2;
+
+            Assert.True(expectedPol == resPol);
+        }
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorMinus_NullArray_ThrowsArgumentNullException()
+        {
+            double[] arr1 = { 12.5, 13.0, 13.5 };
+            double[] arr2 = null;
+            double[] res;
+            Polynomial pol1 = new Polynomial(arr1);
+
+            Assert.Catch<ArgumentNullException>(() => res = pol1 - arr2);
+        }
+
+        #endregion
     }
 }
