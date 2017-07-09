@@ -23,7 +23,7 @@ namespace Task2.Logic.Tests
         [TestCase(double.NaN, "1111111111111000000000000000000000000000000000000000000000000000")]
         [TestCase(double.NegativeInfinity, "1111111111110000000000000000000000000000000000000000000000000000")]
         [TestCase(double.PositiveInfinity, "0111111111110000000000000000000000000000000000000000000000000000")]
-        [Category("DoubleExtension")]
+        [Category("Double extension")]
         #endregion
         public void ConvertToIEE754_AllOk_ReturnsStringRepresentation(double d, string expectedResult)
         {

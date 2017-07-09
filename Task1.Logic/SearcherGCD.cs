@@ -129,7 +129,12 @@ namespace Task1.Logic
 
         #region PrivateFunctions
 
-        private static int _SearchByEuclid(int a, int b)
+        //Is it a good idea to use "_" in the name of function 
+        //or would it be better to use "SearchByEuclidEngine"?
+        //I want to show that this function is encapsulation of public SearchByEuclid.
+        //So my another private functions do not contain "_" in the name.
+        //Thank you for your help.
+        private static int _SearchByEuclid(int a, int b)    
         {
             int temp;
             while (a != 0)
