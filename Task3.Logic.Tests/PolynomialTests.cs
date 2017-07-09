@@ -199,5 +199,28 @@ namespace Task3.Logic.Tests
         }
 
         #endregion
+
+
+        #region Operator* Tests
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorMultiply_TwoPolynomial_ReturnsPolynomial()
+        {
+            double[] arr1 = { -3, -2, -1 };
+            double[] arr2 = { -1, -2, -4 };
+            double[] expectedArr = { 3, 8, 17, 10, 4 };
+
+            Polynomial pol1 = new Polynomial(arr1);
+            Polynomial pol2 = new Polynomial(arr2);
+            Polynomial expectedPol = new Polynomial(expectedArr);
+
+            Polynomial resPol = pol1 * pol2;
+
+            Assert.True(expectedPol == resPol);
+        }
+
+        #endregion
+
     }
 }

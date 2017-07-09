@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace Task3.Logic
 {
+
+    /// <summary>
+    /// Representation of polynomial. 
+    /// </summary>
     public sealed class Polynomial
     {
 
+        /// <summary>
+        /// Constructor takes coefficients from double array. 
+        /// </summary>
+        /// <param name="coeffs">
+        /// Coefficient of a polynomial.
+        /// </param>
         public Polynomial(params double[] coeffs)
         {
             CheckInputCoeffs(coeffs);
@@ -18,6 +28,15 @@ namespace Task3.Logic
             coeffs.CopyTo(_coeffs, 0);
         }
 
+        /// <summary>
+        /// Calculate sum of monomials.
+        /// </summary>
+        /// <returns>
+        /// Sum of monomials in double.
+        /// </returns>
+        /// <param name="num">
+        /// Double variable for polynomial.
+        /// </param>
         public double CalculateSum(double num)
         {
             double sum = 0;
@@ -31,11 +50,17 @@ namespace Task3.Logic
 
         #region PropertiesIndexatorСonverter
 
+        /// <summary>
+        /// Polynomical degree.
+        /// </summary>
         public int Length
         {
             get { return _coeffs.Length; }
         }
 
+        /// <summary>
+        /// Indexer returns a double coefficient.
+        /// </summary>
         public double this[int index]
         {
             get
@@ -47,6 +72,9 @@ namespace Task3.Logic
             }
         }
 
+        /// <summary>
+        /// Implicit conversion polynomial to double array.
+        /// </summary>
         public static implicit operator double[] (Polynomial pol)
         {
             return pol?._coeffs;
@@ -93,7 +121,7 @@ namespace Task3.Logic
 
         #region Operators == and !=
 
-        public static bool operator == (Polynomial pol1, Polynomial pol2)
+        public static bool operator ==(Polynomial pol1, Polynomial pol2)
         {
             return pol1.Equals(pol2);
         }
@@ -155,10 +183,39 @@ namespace Task3.Logic
 
         #endregion
 
+        #region Operator*
+
+        public static Polynomial operator *(Polynomial ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Multiply(ob1, ob2));
+        }
+
+        public static Polynomial operator *(double[] ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Multiply(ob1, ob2));
+        }
+
+        public static Polynomial operator *(Polynomial ob1, double[] ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Multiply(ob1, ob2));
+        }
+
+        #endregion
+
+
         #endregion
 
 
         #region Private
+
+
+        #region Checkers
 
         private static void CheckInputCoeffs(double[] coeffs)
         {
@@ -174,11 +231,21 @@ namespace Task3.Logic
             }
         }
 
-        private static void CheckInputArrays(double[] arr1,double[] arr2)
+        private static void CheckInputArrays(double[] arr1, double[] arr2)
         {
             if (arr1 == null || arr2 == null)
                 throw new ArgumentNullException();
         }
+
+        private static void CheckInputArrays(double[] arr1)
+        {
+            if (arr1 == null)
+                throw new ArgumentNullException();
+        }
+
+        #endregion
+
+        #region Operators
 
         private static double[] Sum(double[] arr1, double[] arr2)
         {
@@ -213,9 +280,25 @@ namespace Task3.Logic
             return resArr;
         }
 
+        private static double[] Multiply(double[] arr1, double[] arr2)
+        {
+            double[] res = new double[arr1.Length + arr2.Length - 1];
+
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                for (int j = 0; j < arr2.Length; j++)
+                {
+                    res[i + j] += arr1[i] * arr2[j];
+                }
+            }
+
+            return res;
+        }
+
+        #endregion
+
         private readonly double[] _coeffs;
 
-  
 
         #endregion
 
