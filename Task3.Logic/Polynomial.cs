@@ -11,7 +11,7 @@ namespace Task3.Logic
 
         public Polynomial(params double[] coeffs)
         {
-            ChechInputCoeffs(coeffs);
+            CheckInputCoeffs(coeffs);
 
             _coeffs = new double[coeffs.Length];
 
@@ -29,6 +29,8 @@ namespace Task3.Logic
         }
 
 
+        #region PropertiesIndexatorСonverter
+
         public int Length
         {
             get { return _coeffs.Length; }
@@ -45,10 +47,12 @@ namespace Task3.Logic
             }
         }
 
-        public static explicit operator double[] (Polynomial pol)
+        public static implicit operator double[] (Polynomial pol)
         {
             return pol?._coeffs;
         }
+
+        #endregion
 
 
         #region ObjectMethodsOverloading
@@ -87,13 +91,52 @@ namespace Task3.Logic
         #region OperatorsOverloading
 
 
+        #region Operators == and !=
+
+        public static bool operator == (Polynomial pol1, Polynomial pol2)
+        {
+            return pol1.Equals(pol2);
+        }
+
+        public static bool operator !=(Polynomial pol1, Polynomial pol2)
+        {
+            return !(pol1 == pol2);
+        }
+
+        #endregion
+
+        #region Operator+
+
+        public static Polynomial operator +(Polynomial ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Sum(ob1, ob2));
+        }
+
+        public static Polynomial operator +(double[] ob1, Polynomial ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Sum(ob1, ob2));
+        }
+
+        public static Polynomial operator +(Polynomial ob1, double[] ob2)
+        {
+            CheckInputArrays(ob1, ob2);
+
+            return new Polynomial(Sum(ob1, ob2));
+        }
+
+        #endregion
+
 
         #endregion
 
 
         #region Private
 
-        private void ChechInputCoeffs(double[] coeffs)
+        private static void CheckInputCoeffs(double[] coeffs)
         {
             if (coeffs == null)
                 throw new ArgumentNullException();
@@ -107,7 +150,29 @@ namespace Task3.Logic
             }
         }
 
+        private static void CheckInputArrays(double[] arr1,double[] arr2)
+        {
+            if (arr1 == null || arr2 == null)
+                throw new ArgumentNullException();
+        }
+
+        private static double[] Sum(double[] arr1, double[] arr2)
+        {
+            double[] longest = (arr1.Length > arr2.Length) ? arr1 : arr2;
+            double[] shortest = (longest == arr1) ? arr2 : arr1;
+
+            double[] resArr = new double[longest.Length];
+            longest.CopyTo(resArr, 0);
+
+            for (int i = 0; i < shortest.Length; i++)
+                resArr[i] += shortest[i];
+
+            return resArr;
+        }
+
         private readonly double[] _coeffs;
+
+  
 
         #endregion
 

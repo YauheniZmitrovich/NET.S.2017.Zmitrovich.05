@@ -92,6 +92,7 @@ namespace Task3.Logic.Tests
 
         #endregion
 
+
         #region EqualsTests
 
         [Test]
@@ -114,6 +115,40 @@ namespace Task3.Logic.Tests
             Polynomial ob2 = new Polynomial(arr);
 
             Assert.True(ob1.Equals(ob2));
+        }
+
+        #endregion
+
+
+        #region Operator+ Tests
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorPlus_TwoPolynomial_ReturnsPolynomial()
+        {
+            double[] arr1 = { 12.5, 13.0, 13.5 };
+            double[] arr2 = { 7.5, 7.0 };
+            double[] expectedArr = { 20, 20, 13.5 };
+
+            Polynomial pol1 = new Polynomial(arr1);
+            Polynomial pol2 = new Polynomial(arr2);
+            Polynomial expectedPol = new Polynomial(expectedArr);
+
+            Polynomial resPol = pol1 + pol2;
+
+            Assert.True(expectedPol == resPol);
+        }
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void OperatorPlus_NullArray_ThrowsArgumentNullException()
+        {
+            double[] arr1 = { 12.5, 13.0, 13.5 };
+            double[] arr2 = null;
+            double[] res;
+            Polynomial pol1 = new Polynomial(arr1);
+
+            Assert.Catch<ArgumentNullException>(() => res = pol1 + arr2);
         }
 
         #endregion
