@@ -78,16 +78,16 @@ namespace Task3.Logic.Tests
 
         [TestCase(9)]
         [TestCase(-10)]
-        [TestCase(0)]
+        [TestCase(-1)]
         [Category("Polynomial")]
-        public void Indexer_IndexOutOfRange_ThrowsIndexOutOfRangeExceptions(int i)
+        public void Indexer_ArgumentOutOfRange_ThrowsArgumentOutOfRangeExceptions(int i)
         {
             double[] arr = { 10, 11, 12, 13, 14, 15 };
             Polynomial pol = new Polynomial(arr);
 
             double res;
 
-            Assert.Catch<IndexOutOfRangeException>(() => res = pol[i]);
+            Assert.Catch<ArgumentOutOfRangeException>(() => res = pol[i]);
         }
 
         #endregion
@@ -153,7 +153,7 @@ namespace Task3.Logic.Tests
 
         [Test]
         [CategoryAttribute("Polynomial")]
-        [Ignore("For double don't working")]
+        [Ignore("Not checks")]
         public void OperatorPlus_Overflow_ThrowsOverflowException()
         {
             double[] arr1 = { double.MaxValue, 13.0, 13.5 };
@@ -182,7 +182,7 @@ namespace Task3.Logic.Tests
             Polynomial pol2 = new Polynomial(arr2);
             Polynomial expectedPol = new Polynomial(expectedArr);
 
-            Polynomial resPol = pol1 - pol2;
+            Polynomial resPol = Polynomial.Subtract(pol1 ,pol2);
 
             Assert.True(expectedPol == resPol);
         }
@@ -222,6 +222,27 @@ namespace Task3.Logic.Tests
         }
 
         #endregion
+
+
+        #region ICloneable Tests
+
+        [Test]
+        [CategoryAttribute("Polynomial")]
+        public void Clone_WithoutCasting_ReturnNewObject()
+        {
+            double[] coeffs = { 1.3, 2.54, 4.5 };
+            Polynomial pol = new Polynomial(coeffs);
+
+            Polynomial polCopy = pol.Clone();
+
+            bool flag1 = !ReferenceEquals(polCopy, pol);
+            bool flag2 = pol.GetCoefficients().SequenceEqual(polCopy.GetCoefficients());
+
+            Assert.True(flag1 && flag2);
+        }
+
+        #endregion
+
 
     }
 }
