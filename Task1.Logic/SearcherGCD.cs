@@ -36,6 +36,7 @@ namespace Task1.Logic
 
         /// <summary>
         /// Computes GCD of two numbers by classical Euclidian algorithm.
+        /// Also returns the algorythm running time.
         /// </summary>
         /// <returns>
         /// GCD of two number in long representation.
@@ -54,7 +55,7 @@ namespace Task1.Logic
         }
 
         /// <summary>
-        /// Computes GCD of two numbers by classical Euclidian algorithm.
+        /// Computes GCD of three numbers by classical Euclidian algorithm.
         /// </summary>
         /// <returns>
         /// GCD of two number in long representation.
@@ -74,7 +75,7 @@ namespace Task1.Logic
         }
 
         /// <summary>
-        /// Computes GCD of two numbers by classical Euclidian algorithm.
+        /// Computes GCD of some numbers by classical Euclidian algorithm.
         /// </summary>
         /// <returns>
         /// GCD of two number in long representation.
@@ -135,6 +136,7 @@ namespace Task1.Logic
 
         /// <summary>
         /// Computes GCD of two numbers by Stein's algorithm.
+        /// Also returns the algorythm running time.
         /// </summary>
         /// <returns> GCD of two number in long representation. </returns>
         /// <param name="time"> The algorythm running time in long representation. </param>
@@ -151,7 +153,7 @@ namespace Task1.Logic
         }
 
         /// <summary>
-        /// Computes GCD of two numbers by Stein's algorithm.
+        /// Computes GCD of three numbers by Stein's algorithm.
         /// </summary>
         /// <returns> GCD of two number in long representation. </returns>
         /// <param name="time"> The algorythm running time in long representation. </param>
@@ -168,7 +170,7 @@ namespace Task1.Logic
         }
 
         /// <summary>
-        /// Computes GCD of two numbers by Stein's algorithm.
+        /// Computes GCD of some numbers by Stein's algorithm.
         /// </summary>
         /// <returns> GCD of two number in long representation. </returns>
         /// <param name="time"> The algorythm running time in long representation. </param>
