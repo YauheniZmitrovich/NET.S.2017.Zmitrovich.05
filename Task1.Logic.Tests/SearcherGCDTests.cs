@@ -14,7 +14,7 @@ namespace Task1.Logic.Tests
 
         #region Testing_SearchByEuclid
 
-        #region Testing_SearchByEuclid(int,int)
+        #region Testing_SearchByEuclid(out long,long,long)
 
         [TestCase(18, -12, 6)]
         [TestCase(1000, 975, 25)]
@@ -22,13 +22,13 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 1)]
         [TestCase(0, 0, 0)]
         [Category("Classical Euclidean algorithm")]
-        public void SearchByEuclid_LeftNumGreaterThenRight_ReturnsGCD(int a, int b, int expectedRes)
+        public void SearchByEuclid_LeftNumGreaterThenRight_ReturnsGCD(long a, long b, long expectedRes)
         {
             //act
-            var tuple = SearchByEuclid(a, b);
+            long gcd = SearchByEuclid(a, b);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         [TestCase(975, 1000, 25)]
@@ -36,19 +36,19 @@ namespace Task1.Logic.Tests
         [TestCase(0, 0, 0)]
         [TestCase(0, 1, 1)]
         [Category("Classical Euclidean algorithm")]
-        public void SearchByEuclid_RightNumGreaterThenLeft_ReturnsGCD(int a, int b, int expectedRes)
+        public void SearchByEuclid_RightNumGreaterThenLeft_ReturnsGCD(long a, long b, long expectedRes)
         {
             //act
-            var tuple = SearchByEuclid(a, b);
+            double gcd = SearchByEuclid(a, b);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         #endregion
 
 
-        #region Testing_SearchByEuclid(int,int,int)
+        #region Testing_SearchByEuclid(out long,long,long,long)
 
         [TestCase(18, -12, 24, 6)]
         [TestCase(1000, 975, 250, 25)]
@@ -56,19 +56,20 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 0, 1)]
         [TestCase(0, 0, 0, 0)]
         [Category("Classical Euclidean algorithm")]
-        public void SearchByEuclid_ThreeParams_ReturnsGCD(int a, int b, int c, int expectedRes)
+        public void SearchByEuclid_ThreeParams_ReturnsGCD(long a, long b, long c, long expectedRes)
         {
             //act
-            var tuple = SearchByEuclid(a, b, c);
+            long time;
+            long gcd = SearchByEuclid(out time, a, b, c);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         #endregion
 
 
-        #region Testing_SearchByEuclid(params int[])
+        #region Testing_SearchByEuclid(out long,params long[])
 
         [TestCase(6, 18, -12, 24, 36)]
         [TestCase(25, 1000, 975, 250, -1250, 250, -625)]
@@ -76,13 +77,14 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 0, 0, 0, 0, 0, 1)]
         [TestCase(0, 0, 0, 0, 0)]
         [Category("Classical Euclidean algorithm")]
-        public void SearchByEuclid_GoodNums_ReturnsGCD(int expectedRes, params int[] nums)
+        public void SearchByEuclid_GoodNums_ReturnsGCD(long expectedRes, params long[] nums)
         {
             //act
-            var tuple = SearchByEuclid(nums);
+            long time;
+            long gcd = SearchByEuclid(out time, nums);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
 
@@ -90,16 +92,18 @@ namespace Task1.Logic.Tests
         [Category("Classical Euclidean algorithm")]
         public void SearchByEuclid_NullArray_ThrowsArgumentNullExceptions()
         {
-            var ex = Assert.Catch<ArgumentNullException>(() => SearchByEuclid(null));
+            long time;
+            var ex = Assert.Catch<ArgumentNullException>(() => SearchByEuclid(out time, null));
             StringAssert.Contains("Value cannot be null.", ex.Message);
         }
 
-        [TestCase(new int[] { })]
-        [TestCase(new int[] { 1 })]
+        [TestCase(new long[] { })]
+        [TestCase(new long[] { 1 })]
         [Category("Classical Euclidean algorithm")]
-        public void SearchByEuclid_ArrayLengthLessThanTwo_ThrowsArgumentExceptions(params int[] nums)
+        public void SearchByEuclid_ArrayLengthLessThanTwo_ThrowsArgumentExceptions(params long[] nums)
         {
-            var ex = Assert.Catch<ArgumentException>(() => SearchByEuclid(nums));
+            long time;
+            var ex = Assert.Catch<ArgumentException>(() => SearchByEuclid(out time, nums));
             StringAssert.Contains("Value does not fall within the expected range.", ex.Message);
         }
 
@@ -110,7 +114,7 @@ namespace Task1.Logic.Tests
 
         #region Testing_SearchByStein
 
-        #region Testing_SearchByStein(int,int)
+        #region Testing_SearchByStein(long,long)
 
         [TestCase(18, -12, 6)]
         [TestCase(1000, 975, 25)]
@@ -118,13 +122,13 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 1)]
         [TestCase(0, 0, 0)]
         [Category("Stein's algorithm")]
-        public void SearchByStein_LeftNumGreaterThenRight_ReturnsGCD(int a, int b, int expectedRes)
+        public void SearchByStein_LeftNumGreaterThenRight_ReturnsGCD(long a, long b, long expectedRes)
         {
             //act
-            var tuple = SearchByStein(a, b);
+            long gcd = SearchByStein(a, b);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         [TestCase(975, 1000, 25)]
@@ -132,19 +136,19 @@ namespace Task1.Logic.Tests
         [TestCase(0, 0, 0)]
         [TestCase(0, 1, 1)]
         [Category("Stein's algorithm")]
-        public void SearchByStein_RightNumGreaterThenLeft_ReturnsGCD(int a, int b, int expectedRes)
+        public void SearchByStein_RightNumGreaterThenLeft_ReturnsGCD(long a, long b, long expectedRes)
         {
             //act
-            var tuple = SearchByStein(a, b);
+            long gcd = SearchByStein(a, b);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         #endregion
 
 
-        #region Testing_SearchByStein(int,int,int)
+        #region Testing_SearchByStein(out long,long,long,long)
 
         [TestCase(18, -12, 24, 6)]
         [TestCase(1000, 975, 250, 25)]
@@ -152,19 +156,20 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 0, 1)]
         [TestCase(0, 0, 0, 0)]
         [Category("Stein's algorithm")]
-        public void SearchByStein_ThreeParams_ReturnsGCD(int a, int b, int c, int expectedRes)
+        public void SearchByStein_ThreeParams_ReturnsGCD(long a, long b, long c, long expectedRes)
         {
             //act
-            var tuple = SearchByStein(a, b, c);
+            long time;
+            long gcd = SearchByStein(out time, a, b, c);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
         #endregion
 
 
-        #region Testing_SearchByStein(params int[])
+        #region Testing_SearchByStein(out long,params long[])
 
         [TestCase(6, 18, -12, 24, 36)]
         [TestCase(25, 1000, 975, 250, -1250, 250, -625)]
@@ -172,13 +177,15 @@ namespace Task1.Logic.Tests
         [TestCase(1, 0, 0, 0, 0, 0, 0, 1)]
         [TestCase(0, 0, 0, 0, 0)]
         [Category("Stein's algorithm")]
-        public void SearchByStein_GoodNums_ReturnsGCD(int expectedRes, params int[] nums)
+        public void SearchByStein_GoodNums_ReturnsGCD(long expectedRes, params long[] nums)
         {
+            long time;
+
             //act
-            var tuple = SearchByStein(nums);
+            long gcd = SearchByStein(out time, nums);
 
             //assert 
-            Assert.AreEqual(expectedRes, tuple.gcd);
+            Assert.AreEqual(expectedRes, gcd);
         }
 
 
@@ -186,16 +193,18 @@ namespace Task1.Logic.Tests
         [Category("Stein's algorithm")]
         public void SearchByStein_NullArray_ThrowsArgumentNullExceptions()
         {
-            var ex = Assert.Catch<ArgumentNullException>(() => SearchByStein(null));
+            long time;
+            var ex = Assert.Catch<ArgumentNullException>(() => SearchByStein(out time, null));
             StringAssert.Contains("Value cannot be null.", ex.Message);
         }
 
-        [TestCase(new int[] { })]
-        [TestCase(new int[] { 1 })]
+        [TestCase(new long[] { })]
+        [TestCase(new long[] { 1 })]
         [Category("Stein's algorithm")]
-        public void SearchByStein_ArrayLengthLessThanTwo_ThrowsArgumentExceptions(params int[] nums)
+        public void SearchByStein_ArrayLengthLessThanTwo_ThrowsArgumentExceptions(params long[] nums)
         {
-            var ex = Assert.Catch<ArgumentException>(() => SearchByStein(nums));
+            long time;
+            var ex = Assert.Catch<ArgumentException>(() => SearchByStein(out time, nums));
             StringAssert.Contains("Value does not fall within the expected range.", ex.Message);
         }
 
