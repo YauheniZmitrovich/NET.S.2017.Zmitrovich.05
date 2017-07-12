@@ -112,7 +112,7 @@ namespace Task3.Logic.Tests
         {
             double[] arr = { 12.34, 12.1 };
             Polynomial ob1 = new Polynomial(arr);
-            Polynomial ob2 = new Polynomial(arr);
+            Polynomial ob2 = ob1;
 
             Assert.True(ob1.Equals(ob2));
         }
@@ -182,7 +182,7 @@ namespace Task3.Logic.Tests
             Polynomial pol2 = new Polynomial(arr2);
             Polynomial expectedPol = new Polynomial(expectedArr);
 
-            Polynomial resPol = Polynomial.Subtract(pol1 ,pol2);
+            Polynomial resPol = Polynomial.Subtract(pol1, pol2);
 
             Assert.True(expectedPol == resPol);
         }

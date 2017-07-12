@@ -147,20 +147,28 @@ namespace Task3.Logic
 
         public override bool Equals(object obj)
         {
-            return ReferenceEquals(obj, this);
+            Polynomial pol = obj as Polynomial;
+            if ((object)pol == null)
+            {
+                return false;
+            }
+
+            return GetCoefficients().SequenceEqual(pol.GetCoefficients());
         }
 
         public bool Equals(Polynomial pol)
         {
-            if (pol?.Length != Length)
+            if ((object)pol == null)
+            {
                 return false;
+            }
 
             return GetCoefficients().SequenceEqual(pol.GetCoefficients());
         }
 
         public override int GetHashCode()
         {
-            return _coeffs.GetHashCode();
+            return GetCoefficients().GetHashCode();
         }
 
         public override string ToString()
@@ -169,30 +177,6 @@ namespace Task3.Logic
 
             foreach (double c in GetCoefficients())//Is it OK? 
                 str += c.ToString() + " ";
-
-            //There are 4 ways:
-            //1) use (double[])this 
-            //In my opinion it's less readable code.
-            //2) public method GetCoefficient()
-            //Does java developer write like this every same situation?
-            //3) property 
-            //Maybe it's the best way. But we already have two almost equal entity.
-            //Three is too much.//Or two it's also too much?
-            //4) not a word more
-
-            //OK,property. Why not?
-            //As I understood,since we returns copy of our object(double[]) 
-            // => we can't use property. 
-            //So if we return a reference then we can use it.
-            //
-            //Summary:
-            //If we have a ref type (example:array) as part of our class :
-            //property - for reference returning.
-            //method - for object's copy returning
-            //
-            //Where do I have mistakes in my thoughts?
-            //Thank you for your attention.
-
 
             return str;
         }
@@ -217,7 +201,17 @@ namespace Task3.Logic
 
         public static bool operator ==(Polynomial pol1, Polynomial pol2)
         {
-            return pol1.Equals(pol2);
+            if (ReferenceEquals((object)pol1, (object)pol2))
+            {
+                return true;
+            }
+
+            if ((object)pol1 == null || (object)pol2 == null)
+            {
+                return false;
+            }
+
+            return pol1.GetCoefficients().SequenceEqual(pol2.GetCoefficients());
         }
 
         public static bool operator !=(Polynomial pol1, Polynomial pol2)
